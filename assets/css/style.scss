@@ -1,0 +1,395 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Storytellr Documentation Theme */
+/* Matches branding from storytellr.app */
+
+:root {
+  /* Storytellr Brand Colors from app */
+  --accent-color: #42a5f5;
+  --accent-light: #64b5f6;
+  --accent-dark: #1976d2;
+  --accent-darker: #1565c0;
+
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #fafafa;
+
+  --text-primary: #333333;
+  --text-secondary: #555555;
+  --text-heading: #111111;
+
+  --border-color: #c4c4c4;
+  --border-light: #eaeaea;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 2px 12px rgba(0, 0, 0, 0.15);
+
+  --success-color: #4caf50;
+  --error-color: #f44336;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
+/* Header matching Storytellr */
+.page-header {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-darker));
+  color: white;
+  padding: 3rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border-bottom: none;
+}
+
+.project-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.project-tagline {
+  font-size: 1.15rem;
+  font-weight: 400;
+  opacity: 0.95;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+/* Main content area */
+.main-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-md);
+  border-radius: 8px;
+  margin-top: -2rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (max-width: 64em) {
+  .main-content {
+    padding: 2rem 1.5rem;
+    margin-top: -1rem;
+  }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2.25rem;
+  border-bottom: 3px solid var(--accent-color);
+  padding-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 0.4rem;
+  color: var(--accent-darker);
+}
+
+h3 {
+  font-size: 1.4rem;
+  color: var(--accent-dark);
+}
+
+h4 {
+  font-size: 1.15rem;
+}
+
+p {
+  margin-bottom: 1.2rem;
+}
+
+/* Links */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  color: var(--accent-dark);
+  border-bottom-color: var(--accent-dark);
+}
+
+.main-content a:not(.btn) {
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  color: white;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+  background-color: var(--accent-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  border-bottom: none;
+}
+
+/* Code blocks */
+code {
+  padding: 0.2rem 0.5rem;
+  margin: 0 0.1rem;
+  font-size: 0.9em;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  color: var(--text-primary);
+}
+
+pre {
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+pre code {
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background-color: transparent;
+  border: none;
+}
+
+/* Tables */
+table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  box-shadow: var(--shadow-sm);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+th {
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-light);
+}
+
+tr:nth-child(even) {
+  background-color: var(--bg-tertiary);
+}
+
+tr:hover {
+  background-color: rgba(66, 165, 245, 0.05);
+}
+
+/* Blockquotes */
+blockquote {
+  padding: 0.75rem 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--text-secondary);
+  border-left: 4px solid var(--accent-color);
+  background-color: var(--bg-tertiary);
+  border-radius: 4px;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* Lists */
+ul, ol {
+  margin: 1rem 0 1rem 2rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+li > p {
+  margin-bottom: 0.5rem;
+}
+
+/* Horizontal rule */
+hr {
+  height: 2px;
+  padding: 0;
+  margin: 2rem 0;
+  background-color: var(--border-light);
+  border: 0;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
+  margin: 1rem 0;
+}
+
+/* Badges/Labels */
+.label, .badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 12px;
+  background-color: var(--accent-color);
+  color: white;
+  margin-right: 0.5rem;
+}
+
+/* Checkbox lists (GitHub-style task lists) */
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* Footer */
+.site-footer {
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  text-align: center;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-primary);
+}
+
+.site-footer-owner {
+  margin-bottom: 0.5rem;
+}
+
+.site-footer-credits {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Alerts/Callouts */
+.alert {
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 6px;
+  border-left: 4px solid;
+}
+
+.alert-info {
+  background-color: #e3f2fd;
+  border-left-color: #2196f3;
+  color: #0d47a1;
+}
+
+.alert-warning {
+  background-color: #fff3e0;
+  border-left-color: #ff9800;
+  color: #e65100;
+}
+
+.alert-success {
+  background-color: #e8f5e9;
+  border-left-color: var(--success-color);
+  color: #1b5e20;
+}
+
+.alert-danger {
+  background-color: #ffebee;
+  border-left-color: var(--error-color);
+  color: #b71c1c;
+}
+
+/* Responsive design */
+@media screen and (max-width: 42em) {
+  .project-name {
+    font-size: 1.75rem;
+  }
+
+  .project-tagline {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--accent-color);
+  color: white;
+}

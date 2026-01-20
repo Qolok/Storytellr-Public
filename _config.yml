@@ -1,4 +1,27 @@
 title: Storytellr Documentation
-description: Official documentation and support for Storytellr, a professional manuscript writing application
+description: Official documentation and support for Storytellr - A professional manuscript writing application
 theme: jekyll-theme-cayman
 show_downloads: false
+
+# SEO and social
+url: "https://docs.storytellr.app"
+baseurl: ""
+
+# GitHub repository (for issue links, etc.)
+github:
+  repository_url: "https://github.com/Qolok/Storytellr-Public"
+  repository_name: "Storytellr-Public"
+  owner_name: "Qolok"
+  owner_url: "https://github.com/Qolok"
+  is_project_page: true
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
