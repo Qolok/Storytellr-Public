@@ -118,6 +118,39 @@ Once connected, the app will:
 - Auto-save changes to cloud storage every 3 seconds (if auto-save is enabled)
 - Display cloud files in the "Cloud Files" section on the welcome screen
 
+### Cloud Storage Data Protection
+
+Storytellr includes multiple safeguards specifically for cloud-synced files:
+
+#### Conflict Detection
+- **Pre-save validation**: Checks cloud file metadata (eTag) before every save
+- **External change detection**: Identifies if file was modified on another device
+- **Automatic conflict resolution**: Prompts you to choose between local or cloud version
+- **Focus-based refresh**: Re-checks cloud file for changes when you return to the tab
+
+#### Data Integrity
+- **Blank file protection**: Prevents overwriting your work with empty cloud data
+- **Automatic recovery**: Re-downloads from cloud if browser storage becomes corrupted
+- **Transaction semantics**: Failed saves are rolled back to preserve data integrity
+- **eTag tracking**: Uses cloud provider versioning to ensure you're always saving to the latest version
+
+#### Common Scenarios
+
+**Multi-device editing**: If you edit the same file on two devices:
+1. Storytellr detects the conflict before saving
+2. Shows you both versions with word counts and timestamps
+3. Lets you choose which version to keep or manually merge
+
+**Page refresh with corrupted data**: If browser storage gets corrupted:
+1. On page load, validates stored content has actual words (not just HTML)
+2. Automatically re-downloads from cloud if local data is invalid
+3. Restores your work without manual intervention
+
+**External modifications**: If file is modified in cloud storage directly:
+1. When you refocus the browser tab, checks for external changes
+2. If no local unsaved changes, auto-applies external version
+3. If you have local changes, prompts for conflict resolution
+
 ## Privacy
 
 As stated in the app: "We don't collect any of your information (and don't care to)."

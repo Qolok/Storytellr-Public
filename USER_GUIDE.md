@@ -61,10 +61,36 @@ These icons are visually aligned with the filename for clarity.
 
 ### Auto-Save
 
-- Changes save automatically every 3 seconds
-- No need to manually save
-- File handles persist across browser sessions
-- Changes are detected and saved intelligently
+Storytellr includes intelligent auto-save with multiple safeguards to protect your work:
+
+- **Automatic saving**: Changes save every 3 seconds after you stop typing
+- **No manual saves needed**: Your work is continuously protected
+- **Persistent file access**: File handles survive browser sessions
+- **Smart detection**: Only saves when actual changes are detected
+
+#### Data Protection Features
+
+Storytellr includes comprehensive safeguards against data loss:
+
+- **Blank document protection**: Prevents saving empty files over your work
+- **Significant loss detection**: Warns when large amounts of content are being deleted
+- **Concurrent save prevention**: Blocks overlapping save operations that could corrupt data
+- **Automatic recovery**: Restores content from cloud if browser storage becomes corrupted
+- **Conflict detection**: Identifies external changes before saving to prevent overwrites
+- **Transaction rollback**: Reverts failed saves to preserve your data integrity
+- **Unsaved changes warning**: Browser prompts before closing tab with unsaved work
+
+#### How Protection Works
+
+When auto-save runs, Storytellr performs multiple validation checks:
+
+1. **Word count verification**: Compares current content to last saved version
+2. **Significant loss check**: Blocks saves if you've lost more than 30% of your content
+3. **Blank document check**: Prevents overwriting your work with empty content
+4. **External change detection**: Checks if file was modified elsewhere before saving
+5. **State synchronization**: Ensures browser storage matches your actual document
+
+If validation detects a problem, you'll see a warning dialog explaining the issue and your options. Your content is never automatically overwritten when something looks wrong.
 
 ## The Editor
 

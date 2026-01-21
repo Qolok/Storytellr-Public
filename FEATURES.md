@@ -32,25 +32,37 @@ Complete reference documentation for all features in Storytellr.
 
 ### Auto-Save System
 
-**Description**: Automatic document persistence with intelligent change detection.
+**Description**: Automatic document persistence with comprehensive data protection and intelligent change detection.
 
 **How It Works**:
 - Monitors for content changes
 - Saves after 3 seconds of inactivity
+- Validates content before every save
 - Detects external file changes
 - Resolves conflicts when detected
+- Rolls back failed saves automatically
 
-**Features**:
-- No manual save needed
-- File handles persist across sessions
-- Background save processing
-- Conflict resolution when needed
+**Data Protection Features**:
+- **Blank document prevention**: Blocks saving empty files over existing content
+- **Significant loss detection**: Warns when 30%+ of content would be deleted
+- **Large deletion confirmation**: Confirms when 10+ paragraphs are deleted at once
+- **Concurrent save prevention**: Mutex prevents overlapping save operations
+- **Transaction semantics**: Failed saves are rolled back to preserve data
+- **Automatic recovery**: Restores from cloud if browser storage is corrupted
+- **Undo/redo state sync**: Ensures validation works correctly after undo operations
+- **Unsaved changes warning**: Browser prompts before closing tab with unsaved work
 
 **Technical Details**:
 - 3-second debounce timer
+- Fresh word count calculation (bypasses stale React state)
+- Deep cloning for state snapshots (JSON.parse/stringify)
+- eTag-based conflict detection for cloud files
 - AdaptiveFileChangeDetector monitors external changes
 - IndexedDB stores file handles
-- Graceful handling of simultaneous edits
+- Save mutex (isSavingRef) for concurrent operation prevention
+- Version history corruption filtering on initialization
+
+**See Also**: [DATA_SAFETY.md](DATA_SAFETY.md) for detailed information about data protection mechanisms.
 
 ### Real-Time Statistics
 
