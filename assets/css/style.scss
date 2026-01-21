@@ -15,7 +15,7 @@
 
   --bg-primary: #f5f5f5;
   --bg-secondary: #e5e5e5;
-  --bg-tertiary: #fafafa;
+  --bg-header: #202020;
 
   --text-primary: #333333;
   --text-secondary: #555555;
@@ -43,12 +43,12 @@ body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.7;
   color: var(--text-primary);
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
 }
 
 /* Header matching Storytellr */
 .page-header {
-  background: linear-gradient(135deg, var(--accent-color), var(--accent-darker));
+  background: var(--bg-header);
   color: white;
   padding: 3rem 1rem;
   text-align: center;
@@ -59,9 +59,8 @@ body {
 .project-name {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .project-tagline {
@@ -70,6 +69,7 @@ body {
   opacity: 0.95;
   color: white;
   margin-bottom: 1.5rem;
+  display: none;
 }
 
 /* Main content area */
@@ -77,7 +77,7 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 3rem 2rem;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   box-shadow: var(--shadow-md);
   border-radius: 8px;
   margin-top: -2rem;
@@ -103,20 +103,24 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 2.25rem;
-  border-bottom: 3px solid var(--accent-color);
-  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--text-secondary);
+  padding-bottom: 1.5rem;
+}
+
+.main-content h1 {
+  color: var(--text-primary) !important;
 }
 
 h2 {
   font-size: 1.75rem;
   border-bottom: 2px solid var(--border-light);
   padding-bottom: 0.4rem;
-  color: var(--accent-darker);
+  color: var(--accent-dark) !important;
 }
 
 h3 {
   font-size: 1.4rem;
-  color: var(--accent-dark);
+  color: var(--accent-dark) !important;
 }
 
 h4 {
@@ -125,6 +129,10 @@ h4 {
 
 p {
   margin-bottom: 1.2rem;
+}
+
+.main-content p {
+  color: var(--text-secondary) !important;
 }
 
 /* Links */
