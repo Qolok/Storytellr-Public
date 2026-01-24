@@ -49,24 +49,32 @@ These icons are visually aligned with the filename for clarity.
 ### Creating a New Story
 
 1. Click **New Story** on the welcome screen
-2. Choose where to save your `.story` file
+2. Choose where to save your story file (`.html` format)
 3. Grant file system access when prompted
 4. Start writing!
 
 ### Opening an Existing Story
 
 1. Click **Open Story**
-2. Navigate to your `.story` file
+2. Navigate to your story file (`.html` format)
 3. The app will restore your document and all settings
 
 ### Auto-Save
 
 Storytellr includes intelligent auto-save with multiple safeguards to protect your work:
 
-- **Automatic saving**: Changes save every 3 seconds after you stop typing
+- **Smart thresholds**: Saves 5 seconds after you stop typing (requires 20+ character change)
+- **Emergency saves**: Immediate save for large edits (100+ characters)
 - **No manual saves needed**: Your work is continuously protected
 - **Persistent file access**: File handles survive browser sessions
-- **Smart detection**: Only saves when actual changes are detected
+- **Memory efficient**: Character thresholds prevent saves from tiny edits like typo fixes
+- **Browser close protection**: Emergency localStorage backup if browser closes unexpectedly
+
+#### Save Thresholds
+
+- **Small edits (< 20 characters)**: No save to prevent memory churn from typo fixes
+- **Normal edits (20-99 characters)**: Save 5 seconds after you stop typing
+- **Large edits (100+ characters)**: Immediate emergency save (no 5-second delay)
 
 #### Data Protection Features
 

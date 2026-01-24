@@ -36,11 +36,14 @@ Complete reference documentation for all features in Storytellr.
 
 **How It Works**:
 - Monitors for content changes
-- Saves after 3 seconds of inactivity
+- Saves 5 seconds after you stop typing
+- Requires 20+ character change to trigger save
+- Emergency save at 100+ characters (prevents data loss from rapid typing)
 - Validates content before every save
 - Detects external file changes
 - Resolves conflicts when detected
 - Rolls back failed saves automatically
+- Emergency localStorage backup on browser close
 
 **Data Protection Features**:
 - **Blank document prevention**: Blocks saving empty files over existing content
@@ -51,9 +54,15 @@ Complete reference documentation for all features in Storytellr.
 - **Automatic recovery**: Restores from cloud if browser storage is corrupted
 - **Undo/redo state sync**: Ensures validation works correctly after undo operations
 - **Unsaved changes warning**: Browser prompts before closing tab with unsaved work
+- **Emergency thresholds**: 100-character changes trigger immediate save
+- **beforeunload failsafe**: localStorage backup if browser closes unexpectedly
 
 **Technical Details**:
-- 3-second debounce timer
+- 5-second debounce timer (bypassed for emergency saves)
+- 20-character minimum threshold (prevents tiny edit saves)
+- 100-character emergency threshold (immediate save)
+- Mutex prevents concurrent operations
+- Transaction-based state management
 - Fresh word count calculation (bypasses stale React state)
 - Deep cloning for state snapshots (JSON.parse/stringify)
 - eTag-based conflict detection for cloud files
@@ -61,6 +70,7 @@ Complete reference documentation for all features in Storytellr.
 - IndexedDB stores file handles
 - Save mutex (isSavingRef) for concurrent operation prevention
 - Version history corruption filtering on initialization
+- Emergency localStorage backup on beforeunload
 
 **See Also**: [DATA_SAFETY.md](DATA_SAFETY.md) for detailed information about data protection mechanisms.
 
@@ -453,7 +463,7 @@ Approximately 85,000 words
 - Detect external changes
 
 **File Format**:
-- `.story` extension
+- `.html` extension (story files)
 - JSON structure
 - Includes content, notes, notebook, settings
 
@@ -468,7 +478,7 @@ Approximately 85,000 words
 - Any cloud-synced folder
 
 **How It Works**:
-1. Save `.story` file to cloud folder
+1. Save story file (`.html`) to cloud folder
 2. Open same file on another device
 3. Changes sync through cloud provider
 4. App detects external changes
@@ -522,7 +532,7 @@ Approximately 85,000 words
 **Description**: Track recently opened files for quick access.
 
 **Features**:
-- List of recent `.story` files
+- List of recent story files
 - Quick re-open
 - Stored in localStorage
 - Persists across sessions
@@ -597,7 +607,7 @@ Approximately 85,000 words
 **Description**: All settings save with document and reset on close.
 
 **Behavior**:
-- Settings save with `.story` file
+- Settings save with story file
 - Auto-load when opening document
 - Reset to defaults when closing document
 - Each document has independent settings

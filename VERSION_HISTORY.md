@@ -6,11 +6,11 @@ Storytellr automatically maintains a version history of your story, allowing you
 
 Version history is embedded directly in your story file and maintains:
 - **Last 5 manual saves** - Versions created when you explicitly save (Ctrl+S or File → Save)
-- **Last 5 auto-saves** - Versions created automatically every 3 seconds
+- **Last 5 auto-saves** - Versions created on every auto-save
 - **Total of up to 10 versions** - Manual and auto-saves are tracked separately
 
 Each version snapshot includes:
-- Complete story content
+- Complete story content (using diff compression for space efficiency)
 - All bookmarks and notes
 - Notebook entries
 - Manuscript settings
@@ -57,11 +57,17 @@ The current version is marked with a blue "CURRENT" badge and highlighted.
 
 ## Auto-Save Version Creation
 
-Auto-save creates a version snapshot when:
-- **Every 5th auto-save** - Roughly every 15 seconds of active writing
-- **Significant content changes** - When word count changes by 500 or more words
+Auto-save creates a version snapshot on **every auto-save** that occurs.
 
-This balances having recent recovery points without bloating file size.
+Auto-save triggers when:
+- **Normal edits (20-99 characters)**: Save 5 seconds after you stop typing
+- **Large edits (100+ characters)**: Immediate emergency save (no delay)
+- **Small edits (< 20 characters)**: No save to prevent memory churn
+
+This provides:
+- Granular rollback through your last 5 auto-saves
+- Recent recovery points without excessive file size
+- Balance between data safety and storage efficiency
 
 ## Manual Save Behavior
 
@@ -94,10 +100,24 @@ Both warnings can be bypassed if you're intentionally making these changes.
 
 ## File Storage
 
-Version history is stored:
-- **In the story file** - All versions are embedded in the `.story` file for portability and cloud sync
-- **In browser localStorage** - Cached locally for quick restoration on page refresh
-- **Cleared on close** - localStorage cache is cleared when you close a document or create a new one (versions remain in the file)
+Version history is stored in multiple locations for different purposes:
+
+**In the story file (.html)**:
+- All 10 versions embedded for portability
+- Uses diff compression to minimize file size
+- Travels with file across devices and cloud sync
+- Most recent version stored in full, older versions as patches
+
+**In browser localStorage**:
+- Only 2 most recent versions cached (current + 1 backup)
+- Used for crash recovery, not full version history
+- Updates debounced (500ms) to minimize writes
+- Reduces memory usage by ~80% vs caching all 10
+
+**Version History UI**:
+- Displays all 10 versions from file
+- Quick access to restoration and preview
+- Cleared when you close a document or create a new one
 
 ## Best Practices
 
@@ -107,24 +127,30 @@ Version history is stored:
 4. **Check version list** - Periodically review your version history to understand your writing progress
 5. **Don't rely solely on versions** - While version history provides excellent recovery, maintain separate backups of important work
 
-## Limitations
+## Storage Efficiency
 
-- Version history uses full content snapshots, not diffs (storage optimization planned for future)
-- Maximum of 10 versions total (5 manual + 5 auto)
-- Versions are not tracked across file renames or copies
-- No merge functionality for divergent versions
+Version history uses **diff-based storage** for space optimization:
 
-## File Size Considerations
+**How it works**:
+- Most recent version: Full content (~175 KB for 31,000 words)
+- Older versions: Stored as patches/diffs (typically 1-5 KB each)
+- Reconstructs previous versions by applying reverse patches
+- Automatically falls back to full content if patch would be inefficient
 
-For a 31,000-word novel (~150 pages):
-- Each full version snapshot: ~175 KB
-- 10 versions: ~1.75 MB total
-- This is reasonable for most use cases and cloud storage limits
+**File size for 31,000-word novel**:
+- First version: ~175 KB
+- 9 additional diff-based versions: ~30-50 KB total
+- **Total: ~200-225 KB** (vs ~1.75 MB with full snapshots)
+- **90% storage reduction** compared to storing full copies
 
-Larger manuscripts will have proportionally larger version history storage requirements.
+**Benefits**:
+- Smaller file sizes for cloud storage
+- Faster file saves and loads
+- More efficient memory usage
+- Supports larger documents without hitting browser limits
 
 ## Related Features
 
-- [Auto-Save](USER_GUIDE.md#auto-save) - Automatic content saving every 3 seconds
+- [Auto-Save](USER_GUIDE.md#auto-save) - Intelligent auto-save with character thresholds
 - [Cloud Storage](CLOUD_STORAGE_SETUP.md) - Sync your story files and version history across devices
 - [File Formats](EXPORT_GUIDE.md) - Export manuscripts for submission
