@@ -1,158 +1,224 @@
-# Cloud Storage Setup Guide
+# Cloud Storage User Guide
 
-This document explains how to configure cloud storage providers for Storytellr.
+This guide explains how cloud storage works in Storytellr and what to expect when working with cloud-synced files.
 
 ## Overview
 
 Storytellr supports the following cloud storage providers:
-- Microsoft OneDrive
-- Google Drive
-- Dropbox
-- Box
+- **Microsoft OneDrive**
+- **Google Drive**
+- **Dropbox**
+- **Box**
 
-## OAuth Configuration
+Your files are stored directly in your cloud account. Storytellr connects to your cloud storage to read and save your work, but never stores your data on any external servers.
 
-To enable cloud storage, you need to register your application with each provider and obtain OAuth credentials.
+## How Cloud Connection Works
 
-### Required Configuration
+When you connect to a cloud service, Storytellr uses two types of credentials:
 
-Update the `getOAuthUrl` function in `src/utils/cloudStorage.js` with your actual client IDs:
+### Access Tokens (Short-Lived)
+Think of an access token like a temporary key card:
+- **Lasts 1 hour** while you're actively using the app
+- Used to read and save your files
+- Expires automatically after inactivity for security
 
-#### OneDrive (Microsoft)
-1. Register at: https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
-2. Set redirect URI to your app URL (e.g., `http://localhost:5174/` for development)
-3. Required scopes: `Files.ReadWrite offline_access`
-4. Replace `YOUR_CLIENT_ID` in the OneDrive OAuth URL
+### Refresh Tokens (Long-Lived)
+Think of a refresh token like a master key:
+- **Lasts up to 90 days** (depending on the provider)
+- Used to get a new access token when the old one expires
+- Allows seamless reconnection without re-entering credentials
 
-#### Google Drive
-1. Register at: https://console.cloud.google.com/apis/credentials
-2. Enable Google Drive API
-3. Create OAuth 2.0 Client ID
-4. Set authorized redirect URI to your app URL
-5. Required scopes: `https://www.googleapis.com/auth/drive.file`
-6. Replace `YOUR_CLIENT_ID` in the Google Drive OAuth URL
+## Connection Behavior
 
-#### Dropbox
-1. Register at: https://www.dropbox.com/developers/apps
-2. Create a new app with "Full Dropbox" or "App folder" access
-3. Set redirect URI to your app URL
-4. Replace `YOUR_CLIENT_ID` in the Dropbox OAuth URL
+### When You're Actively Working
 
-#### Box
-1. Register at: https://app.box.com/developers/console
-2. Create a new app
-3. Enable OAuth 2.0 authentication
-4. Set redirect URI to your app URL
-5. Replace `YOUR_CLIENT_ID` in the Box OAuth URL
+**With a document open:**
+- Connection stays active automatically
+- Even if your computer sleeps, the app reconnects when you wake it
+- Your work is saved continuously (if auto-save is enabled)
+- Changes from other devices are detected and synced
 
-## OAuth Callback Handler
+**On the Welcome Screen (no document open):**
+- Connection remains active for **1 hour**
+- After 55 minutes of inactivity, you'll see a timeout warning
+- You can choose to stay connected or disconnect
 
-The OAuth callback is handled by the `CloudStorageModal` component. When the OAuth provider redirects back to your application, you need to:
+### Timeout Warning Modal
 
-1. Extract the access token from the URL hash or query parameters
-2. Send it to the parent window using `window.opener.postMessage()`
+After 55 minutes of idle time on the Welcome Screen, you'll see:
 
-Example callback HTML page (optional, for production deployments):
+**"Cloud Connection Timeout"**
+- 5-minute countdown timer
+- Two options:
+  - **Stay Connected** - Resets the timer, keeps you logged in
+  - **Disconnect** - Logs you out for security
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>OAuth Callback</title>
-</head>
-<body>
-    <script>
-        // Extract token from URL
-        const hash = window.location.hash.substring(1);
-        const params = new URLSearchParams(hash);
-        
-        const accessToken = params.get('access_token');
-        const expiresIn = params.get('expires_in');
-        
-        if (accessToken && window.opener) {
-            // Send token to parent window
-            window.opener.postMessage({
-                type: 'cloud-oauth-success',
-                accessToken: accessToken,
-                expiresIn: parseInt(expiresIn) || 3600
-            }, window.location.origin);
-            
-            // Close popup
-            window.close();
-        }
-    </script>
-    <p>Authenticating...</p>
-</body>
-</html>
-```
+**Why this happens:**
+- Security on shared computers (library, office, etc.)
+- Prevents unauthorized access if you walk away
 
-## Development Testing
+**What "Disconnect" does:**
+- Signs you out of cloud storage
+- You can easily reconnect later without re-entering credentials (within 90 days)
+- Your files remain safely in your cloud account
 
-For development testing without actual OAuth:
+### Automatic Reconnection
 
-1. Open browser console on the Welcome Screen
-2. Run the following to simulate a connection:
-```javascript
-localStorage.setItem('storytellr-cloud-storage', JSON.stringify({
-    provider: 'onedrive',
-    accessToken: 'mock-token',
-    refreshToken: 'mock-refresh',
-    expiresAt: Date.now() + 3600000
-}));
-```
-3. Refresh the page to see the "Cloud Connected" state
+**Within 90 days:**
+- Click "Connect" on the Welcome Screen
+- Storytellr automatically reconnects without asking for credentials
+- Your refresh token handles this seamlessly
 
-## Security Notes
+**After 90 days:**
+- You'll need to sign in again through your cloud provider
+- This is a security measure enforced by cloud providers
+- Your files are still safe in your cloud account
 
-- Never commit OAuth client secrets to the repository
-- Use environment variables for sensitive configuration
-- Consider implementing a backend proxy for token refresh
-- Implement proper token expiration handling
-- Validate redirect URIs to prevent OAuth hijacking
+## Working Across Devices
 
-## File Operations
+Storytellr is designed for multi-device workflows. Here's what happens:
 
-Once connected, the app will:
-- List `.html` story files from the root directory of the cloud storage
-- Download files when clicked
-- Auto-save changes to cloud storage every 3 seconds (if auto-save is enabled)
-- Display cloud files in the "Cloud Files" section on the welcome screen
+### Scenario: Edit on Mobile, Continue on Desktop
 
-### Cloud Storage Data Protection
+1. **You're working on your laptop:**
+   - Document is open
+   - Computer goes to sleep
 
-Storytellr includes multiple safeguards specifically for cloud-synced files:
+2. **You edit the file on mobile:**
+   - Changes are saved to cloud storage
+   - File is now newer than your laptop's version
 
-#### Conflict Detection
-- **Pre-save validation**: Checks cloud file metadata (eTag) before every save
-- **External change detection**: Identifies if file was modified on another device
-- **Automatic conflict resolution**: Prompts you to choose between local or cloud version
-- **Focus-based refresh**: Re-checks cloud file for changes when you return to the tab
+3. **You wake up your laptop:**
+   - App reconnects automatically
+   - Detects the file changed remotely
+   - **No local changes?** Automatically updates your document
+   - **Have local changes?** Shows conflict resolution modal
 
-#### Data Integrity
-- **Blank file protection**: Prevents overwriting your work with empty cloud data
-- **Automatic recovery**: Re-downloads from cloud if browser storage becomes corrupted
-- **Transaction semantics**: Failed saves are rolled back to preserve data integrity
-- **eTag tracking**: Uses cloud provider versioning to ensure you're always saving to the latest version
+### Conflict Resolution
 
-#### Common Scenarios
+If you've edited on multiple devices simultaneously:
 
-**Multi-device editing**: If you edit the same file on two devices:
-1. Storytellr detects the conflict before saving
-2. Shows you both versions with word counts and timestamps
-3. Lets you choose which version to keep or manually merge
+**What you'll see:**
+- Modal showing both versions side-by-side
+- Word count and last modified time for each
+- Three options:
+  1. **Keep My Changes** - Your local edits win
+  2. **Use Other Device's Changes** - Cloud version wins
+  3. **Save Both Versions** - Creates a conflict copy for manual merge
 
-**Page refresh with corrupted data**: If browser storage gets corrupted:
-1. On page load, validates stored content has actual words (not just HTML)
-2. Automatically re-downloads from cloud if local data is invalid
-3. Restores your work without manual intervention
+**The app prevents:**
+- Silently losing your work
+- Accidentally overwriting important changes
+- Confusion about which version is which
 
-**External modifications**: If file is modified in cloud storage directly:
-1. When you refocus the browser tab, checks for external changes
-2. If no local unsaved changes, auto-applies external version
-3. If you have local changes, prompts for conflict resolution
+## Data Protection Features
 
-## Privacy
+### Automatic Change Detection
+- Checks for remote changes when you return to the browser tab
+- Validates file versions before every save
+- Uses cloud provider's version tracking (eTags)
 
-As stated in the app: "We don't collect any of your information (and don't care to)."
+### Recovery Safeguards
+- Prevents saving blank files (protects against browser crashes)
+- Validates content before overwriting cloud files
+- Automatically recovers from corrupted local storage
 
-All cloud storage interactions happen directly between the user's browser and their cloud provider. No data passes through any intermediary servers.
+### Multi-Device Safety
+- **No local changes** → Automatically applies remote changes
+- **Local changes exist** → Prompts you to choose which version to keep
+- **Conflicting saves** → Rolled back and you're notified
+
+## Privacy & Security
+
+### Your Data is Yours
+- All files stored directly in **your** cloud account
+- No data passes through external servers
+- Storytellr only accesses files it creates
+- You can delete cloud connection anytime
+
+### Security Features
+- **Automatic timeout** on shared computers (1 hour idle)
+- **Encrypted connections** to cloud providers
+- **Token expiration** prevents indefinite access
+- **No credential storage** - tokens are temporary
+
+### What We Can't See
+- Your cloud files or their contents
+- Your cloud credentials
+- Which devices you use
+- When you connect or disconnect
+
+As stated in the app: **"We don't collect any of your information (and don't care to)."**
+
+All cloud interactions happen directly between your browser and your chosen cloud provider.
+
+## Connection States Explained
+
+### Connected (Green)
+- Access token is valid
+- Can read and save files immediately
+- Active connection to your cloud storage
+
+### Disconnected (Gray)
+- No active connection
+- Click to connect/reconnect
+- Your files are safe in cloud storage
+
+### Reconnecting (Automatic)
+When you click a cloud file after being disconnected:
+- If within 90 days → Seamlessly reconnects using refresh token
+- If after 90 days → Prompts for sign-in
+- Your file opens once reconnected
+
+## Best Practices
+
+### For Personal Devices
+- Let the connection stay active
+- Use "Stay Connected" when you see the timeout warning
+- Enjoy automatic reconnection across sessions
+
+### For Shared/Public Computers
+- Use "Disconnect" when finished
+- Don't leave documents open unattended
+- Consider manually disconnecting for extra security
+
+### For Multi-Device Workflows
+- Close documents on one device before editing on another (when possible)
+- If you forget, no worries - conflict resolution has you covered
+- Auto-save keeps your work safe across device switches
+
+## Troubleshooting
+
+### "Connection Expired" Message
+**Cause:** Access token expired after 1 hour of inactivity
+**Solution:** Click "Connect" to automatically reconnect (works within 90 days)
+
+### "Please Sign In" After Long Break
+**Cause:** Refresh token expired (after 90 days of no use)
+**Solution:** Sign in again through your cloud provider - quick and secure
+
+### File Shows Old Version
+**Cause:** Remote file was modified, but local cache is stale
+**Solution:**
+- Refocus the browser tab (automatic check)
+- Or close and reopen the document
+- Recent changes will be detected automatically
+
+### Conflict Modal Keeps Appearing
+**Cause:** Editing same file on multiple devices simultaneously
+**Solution:**
+- Choose one device for editing at a time
+- Or use "Save Both" and manually merge later
+- Consider closing documents when switching devices
+
+## Tips for Best Experience
+
+1. **Trust the auto-save** - It's designed for safety, not speed
+2. **Don't fight the conflict resolver** - It's protecting your work
+3. **Close documents** when done, especially on shared computers
+4. **Let the app reconnect** - It handles expired tokens automatically
+5. **Watch the timeout warning** - 5 minutes is plenty of time to decide
+
+---
+
+*For developer documentation about OAuth setup and configuration, see the developer guides in the repository.*
