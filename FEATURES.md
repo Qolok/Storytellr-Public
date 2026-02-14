@@ -473,8 +473,9 @@ Approximately 85,000 words
 
 **Supported Services**:
 - OneDrive
-- Dropbox
 - Google Drive
+- Dropbox
+- Box
 - Any cloud-synced folder
 
 **How It Works**:

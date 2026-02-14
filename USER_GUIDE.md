@@ -20,7 +20,7 @@ A complete guide to using Storytellr for fiction manuscript preparation.
 
 ### How Cloud Files Work
 
-When you open a file from a connected cloud provider (e.g., OneDrive, Dropbox, Google Drive), Storytellr saves your edits directly back to the cloud storage. You do not need to manually upload or download files—changes are synced automatically.
+When you open a file from a connected cloud provider (e.g., OneDrive, Google Drive, Dropbox, or Box), Storytellr saves your edits directly back to the cloud storage. You do not need to manually upload or download files—changes are synced automatically.
 
 - **Autosave**: Edits are saved to the cloud every few seconds, just like with local files.
 - **Sync**: If you open the same file on another device, changes will appear within a few seconds (depending on your cloud provider's sync speed).
@@ -41,7 +41,7 @@ When you open a file from a connected cloud provider (e.g., OneDrive, Dropbox, G
 
 In the Recent Files list, a small icon appears next to each filename:
 
-- <img src="../docs/svg/cloud.svg" alt="Cloud icon" style="height:1em;vertical-align:middle;"> indicates a cloud file (OneDrive, Dropbox, Google Drive)
+- <img src="../docs/svg/cloud.svg" alt="Cloud icon" style="height:1em;vertical-align:middle;"> indicates a cloud file (OneDrive, Google Drive, Dropbox, or Box)
 - <img src="../docs/svg/hard-drive.svg" alt="Hard drive icon" style="height:1em;vertical-align:middle;"> indicates a local file
 
 These icons are visually aligned with the filename for clarity.
@@ -453,7 +453,7 @@ All customization settings:
 ### Performance
 
 - Auto-save works best with stable file system access
-- Cloud sync works seamlessly with OneDrive, Dropbox, Google Drive
+- Cloud sync works seamlessly with OneDrive, Google Drive, Dropbox, or Box
 - Large manuscripts (100k+ words) perform smoothly
 - Browser needs file system permissions for full functionality
 
