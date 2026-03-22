@@ -3,6 +3,7 @@
 ## v1.2.2 — March 2026
 
 ### New Features
+- **Enriched document statistics** — The statistics panel now includes a pacing chart, Flesch readability score, dialogue ratio, vocabulary richness, and estimated reading and speaking times
 - **Cloud disconnection recovery** — Storytellr now detects when your cloud storage connection drops and shows a recovery prompt, so you never lose track of where your file is saved
 - **Animated sidebar tooltips** — Hover over any sidebar icon to see a smooth, instant tooltip identifying the button
 
