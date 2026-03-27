@@ -10,6 +10,7 @@
 ### Improvements
 - Improved cloud sync reconnect flow, including a remote changes check on reconnect
 - Read aloud in Chrome now handles long documents correctly by chunking text to avoid the browser's silent length limit
+- Story files are now gzip-compressed, reducing file sizes by ~68% — a 6.5 MB file saves as ~2.1 MB. Existing files are upgraded to the new format on next save
 
 ### Bug Fixes
 - Fixed paste sometimes creating nested paragraphs that broke text indentation
@@ -17,6 +18,8 @@
 - Fixed navigation reordering, undo/redo, and session handling edge cases
 - Fixed mobile placeholder text alignment and wrapping
 - Fixed mobile file menu padding
+- Fixed Android Chrome system navigation bar appearing white instead of matching the app theme
+- Fixed opening files in Edge on Android crashing the browser
 
 ---
 
