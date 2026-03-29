@@ -10,7 +10,7 @@ Version history is embedded directly in your story file and maintains:
 - **Total of up to 10 versions** - Manual and auto-saves are tracked separately
 
 Each version snapshot includes:
-- Complete story content (using diff compression for space efficiency)
+- Story content — the most recent version stored in full (the anchor), all older versions stored as patches against it
 - All bookmarks and notes
 - Notebook entries
 - Manuscript settings
@@ -104,9 +104,9 @@ Version history is stored in multiple locations for different purposes:
 
 **In the story file (.html)**:
 - All 10 versions embedded for portability
-- Uses diff compression to minimize file size
+- Most recent version stored in full as the anchor; all older versions stored as independent patches against it — reconstructing any version requires only a single patch apply
+- Identical saves are skipped — no duplicate versions are created if nothing changed
 - Travels with file across devices and cloud sync
-- Most recent version stored in full, older versions as patches
 
 **In browser localStorage**:
 - Only 2 most recent versions cached (current + 1 backup)

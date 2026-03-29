@@ -1,5 +1,14 @@
 # Release Notes
 
+## v1.2.3 — March 2026
+
+### Improvements
+- **Version history now uses proper diff storage** — Previous versions are stored as patches against the most recent save, not as full copies. A 10-version history now adds only a few KB to the file instead of duplicating the full document up to 10 times. Files with existing bloated version histories will compact automatically as you continue saving
+- **No duplicate versions** — Saving without making changes no longer creates a redundant version entry
+- Fixed external file change detection failing on compressed story files
+
+---
+
 ## v1.2.2 — March 2026
 
 ### New Features
