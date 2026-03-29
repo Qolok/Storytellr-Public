@@ -410,6 +410,50 @@ Approximately 85,000 words
 - Quick section access
 - Structure visualization
 
+### Read Aloud
+
+**Description**: Text-to-speech playback of your manuscript using the browser's built-in Speech Synthesis API.
+
+**Features**:
+- Reads from cursor position to end of document
+- Paragraph-by-paragraph highlighting as text is spoken
+- Adjustable speed, pitch, and volume
+- Voice selection (browser/OS dependent)
+- Pause, resume, and stop controls
+- Skip forward/back by paragraph
+
+**Browser & Platform Limitations**:
+
+Read Aloud quality and voice availability depend entirely on your browser and operating system. Storytellr cannot install voices or override browser behavior.
+
+| Platform | Known Issues |
+|---|---|
+| Edge on Android | Voice dropdown is blank (confirmed Microsoft bug — no fix available). Read aloud uses the browser default voice. |
+| Chrome/Firefox on Android | Voice selection is ignored — browser always uses its default voice (Chromium bug). |
+| iOS/iPadOS Safari | Only low-quality built-in voices are available. Enhanced/Premium voices downloaded in iOS Settings are not accessible to web apps (Apple limitation). |
+
+**Recommended Platforms**:
+- **Windows + Chrome/Edge**: Best experience with Microsoft Natural/Neural voices
+- **macOS + Safari**: Good quality with Enhanced voices installed
+
+**See Also**: [Speech Troubleshooting](SPEECH_TROUBLESHOOTING.md)
+
+### Dictation
+
+**Description**: Speech-to-text input using the browser's Web Speech Recognition API.
+
+**Features**:
+- Dictate text directly into the editor
+- Continuous recognition
+- Interim results shown while speaking
+
+**Requirements**:
+- Internet connection (uses Google's speech servers)
+- Microphone permission
+- Chrome or Safari recommended (Edge has known issues)
+
+**See Also**: [Speech Troubleshooting](SPEECH_TROUBLESHOOTING.md)
+
 ### Find & Replace
 
 **Description**: Advanced search with formatting support.

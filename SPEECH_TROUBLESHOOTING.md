@@ -1,7 +1,44 @@
-# Speech-to-Text Troubleshooting Guide
+# Speech Troubleshooting Guide
 
-## Overview
-The speech-to-text (dictation) feature uses the **Web Speech API**, which is built into modern browsers (Chrome, Edge, Safari). This API requires an internet connection because it uses Google's cloud-based speech recognition servers.
+This guide covers both **Read Aloud** (text-to-speech) and **Dictation** (speech-to-text) features.
+
+---
+
+## Read Aloud (Text-to-Speech)
+
+### Overview
+The Read Aloud feature uses the browser's built-in **Web Speech Synthesis API**. The available voices, quality, and behavior are entirely controlled by your browser and operating system — Storytellr has no ability to install voices or override browser limitations.
+
+### Known Browser/Platform Limitations
+
+These are confirmed bugs or limitations in the browsers themselves. They cannot be fixed in Storytellr.
+
+| Platform | Issue |
+|---|---|
+| **Edge on Android** | `getVoices()` always returns empty — voice selection dropdown will be blank. This is a [confirmed Microsoft bug](https://learn.microsoft.com/en-us/answers/questions/1657183/text-to-speech-speech-synthesis-broken-on-mobile-e) with no fix as of 2025. Read aloud may still work using the browser's default voice. |
+| **Chrome/Firefox on Android** | Voice selection is ignored — the browser always uses its default voice regardless of what is selected. This is a known Chromium bug. |
+| **iOS/iPadOS Safari** | Only low-quality built-in voices are exposed via the Web Speech API. Enhanced and Premium voices downloaded through iOS Settings are not accessible to web apps. This is an Apple limitation. |
+
+### Voice Quality Tips
+
+- **Windows**: Microsoft Natural and Neural voices (e.g. "Microsoft Brian Online") are high quality but require an internet connection. Install them via Settings → Time & Language → Speech.
+- **macOS**: Enhanced and Premium voices are available. Install them via System Settings → Accessibility → Spoken Content.
+- **Android**: Use Chrome or Firefox. Voice quality depends on the TTS engine installed on your device (Settings → Accessibility → Text-to-speech).
+- **iOS/iPadOS**: Quality is limited by Safari's API restrictions. No workaround is available.
+
+### Voice Dropdown is Empty
+
+If the voice dropdown shows no options:
+
+1. **Edge on Android**: This is the known Microsoft bug described above. Try Chrome or Firefox instead.
+2. **Other browsers**: Your browser may not support the Speech Synthesis API, or no TTS voices are installed on your device. Check your OS text-to-speech settings.
+
+---
+
+## Dictation (Speech-to-Text)
+
+### Overview
+The speech-to-text (dictation) feature uses the **Web Speech Recognition API**, which is built into modern browsers (Chrome, Edge, Safari). This API requires an internet connection because it uses Google's cloud-based speech recognition servers.
 
 ## Common Issues
 
