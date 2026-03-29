@@ -4,6 +4,7 @@
 
 ### Improvements
 - **Version history now uses proper diff storage** — Previous versions are stored as patches against the most recent save, not as full copies. A 10-version history now adds only a few KB to the file instead of duplicating the full document up to 10 times. Files with existing bloated version histories will compact automatically as you continue saving
+- **Notebook notes and bookmarks excluded from patch versions** — These are only stored in the current version, eliminating ~1.75MB of redundant data from version history
 - **No duplicate versions** — Saving without making changes no longer creates a redundant version entry
 - Fixed external file change detection failing on compressed story files
 

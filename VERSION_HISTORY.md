@@ -11,11 +11,15 @@ Version history is embedded directly in your story file and maintains:
 
 Each version snapshot includes:
 - Story content — the most recent version stored in full (the anchor), all older versions stored as patches against it
-- All bookmarks and notes
-- Notebook entries
-- Manuscript settings
 - Word count and page count
 - Timestamp and save type
+
+The anchor (most recent version) also stores:
+- Bookmarks and notes
+- Notebook entries
+- Manuscript settings
+
+Older patch versions do not store these — if you restore a patch version, your current bookmarks, notes, and settings are preserved.
 
 ## Accessing Version History
 
