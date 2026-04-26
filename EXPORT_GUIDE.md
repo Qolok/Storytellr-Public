@@ -4,23 +4,57 @@ Complete documentation for exporting manuscripts from Storytellr.
 
 ## Table of Contents
 - [Overview](#overview)
+- [Document Structure Tags](#document-structure-tags)
 - [Export Formats](#export-formats)
 - [Manuscript Formatting](#manuscript-formatting)
 - [Headers & Page Numbers](#headers--page-numbers)
 - [Title Pages](#title-pages)
-- [Format-Specific Details](#format-specific-details)
+- [Export Workflow](#export-workflow)
+- [Troubleshooting](#troubleshooting)
+
+---
 
 ## Overview
 
-Storytellr exports manuscripts in three formats, each serving different purposes:
+Storytellr exports manuscripts in four formats, each serving different purposes:
 
 | Format | Purpose | Best For |
 |--------|---------|----------|
-| **TXT** | Plain text | Backup, word processors, universal compatibility |
-| **DOCX** | Microsoft Word | Editing, track changes, Word navigation |
-| **PDF** | Camera-ready | Print, submission, reading, archival |
+| **TXT** | Plain text | Backup, universal compatibility |
+| **DOCX** | Microsoft Word | Editing, track changes, submissions |
+| **PDF** | Camera-ready | Print, agent submissions, archival |
+| **EPUB** | E-reader | Kindle, Kobo, Apple Books, Send to Kindle |
 
 All exports respect your manuscript settings for consistent professional formatting.
+
+---
+
+## Document Structure Tags
+
+Storytellr uses a small set of structural elements to define how your document is organised. These map directly to formatting in every export format — getting them right is the most important step before exporting.
+
+| Editor Element | Button | Purpose | Maps To |
+|----------------|--------|---------|---------|
+| **H2** | Part | Top-level division (Part I, Act One, etc.) | Part heading in all formats |
+| **H3** | Chapter | Chapter heading | Chapter heading in all formats |
+| **Blockquote** | Q | Quoted passage, epigraph, letter within narrative | Indented block in all formats |
+| **HR** | — | Scene break between paragraphs | Centred break symbol or rule |
+| **H1** | *(automatic)* | Title page title | Generated from Story settings |
+
+### How to Apply Tags
+
+1. Click into the line you want to format (or select text)
+2. The floating toolbar appears — click **Part**, **Chapter**, **Q**, or the divider button
+3. Tags are visible as styled elements in the editor and carry through to all exports
+
+### Tips
+
+- **Parts are optional** — if your manuscript has no formal parts, use Chapter (H3) headings only
+- **H1 is managed automatically** — it's inserted by the title page feature in Manuscript Settings, not typed manually
+- **Scene breaks (HR)** style differently per export: a rule in DOCX/PDF, a styled ornament in EPUB
+- **Blockquotes** are indented in all formats; inline bold/italic inside them is preserved
+
+---
 
 ## Export Formats
 
@@ -29,88 +63,58 @@ All exports respect your manuscript settings for consistent professional formatt
 **What It Includes**:
 - All text content
 - Basic paragraph structure
-- Line breaks between sections
 
 **What It Excludes**:
 - Formatting (bold, italic, underline)
 - Headers and page numbers
-- Font styling
-- Special spacing
+- Structural styling
 
 **Use Cases**:
 - Quick backup
-- Importing to other word processors
-- Plain text submissions
+- Importing to other tools
 - Format-agnostic archival
-
-**How to Export**:
-1. File → Export → Save as TXT
-2. Choose save location
-3. File saves with `.txt` extension
 
 ### DOCX (Microsoft Word)
 
 **What It Includes**:
-- All text with formatting preserved
-- Bold, italic, underline styling
-- Heading styles (H1 = Heading 1, H2 = Heading 2)
-- Block quotes with indentation
-- Headers and page numbers (if enabled)
-- Title page (if enabled)
+- All text with formatting preserved (bold, italic, underline)
+- Part headings (H2) and Chapter headings (H3) as Word heading styles
+- Blockquotes with 0.5" indentation
+- Headers and page numbers (if enabled in settings)
+- Title page (if enabled in settings)
 
 **Special Features**:
-- **Word Navigation Pane**: H1 and H2 appear in Word's navigation sidebar
-- **Professional Formatting**: Industry-standard manuscript spacing
-- **Editable**: Full editing capabilities in Microsoft Word
+- **Word Navigation Pane**: H2 (Part) and H3 (Chapter) appear in Word's navigation sidebar
+- **Editable**: Full editing in Microsoft Word
 - **Track Changes**: Compatible with editorial workflows
 
 **Manuscript Standards Applied**:
-- Font from manuscript settings (Times New Roman, Arial, or Courier New)
-- 12pt font size
-- Double-spaced lines (24pt spacing)
-- 1-inch margins (standard document margins)
-- Chapter headings positioned per settings (1/3 or 1/2 page)
-- Scene breaks (H2) centered with proper spacing
-- Block quotes indented 0.5 inches
+- Font from Manuscript Settings (Times New Roman or Arial)
+- 12pt font size, double-spaced lines
+- 1-inch margins
+- Chapter headings positioned 1/3 or 1/2 down the page (configurable)
 - No first-line indent after headings
-- Black text color (overrides Word's default heading colors)
-
-**How to Export**:
-1. File → Export → Save as DOCX
-2. Choose save location
-3. Open in Microsoft Word to edit or review
+- Black text colour (overrides Word's default heading colours)
 
 **Opening in Word**:
 - Use **Navigation Pane** (View → Navigation Pane) to see document structure
-- H1 headings = Heading 1 style
-- H2 headings = Heading 2 style
+- H2 = Heading 2 style, H3 = Heading 3 style
 - Click headings in Navigation Pane to jump to sections
 
 ### PDF (Portable Document Format)
 
 **What It Includes**:
 - All text with formatting preserved
-- Bold, italic, underline styling
 - Professional manuscript spacing
 - Headers and page numbers (if enabled)
 - Title page (if enabled)
-- Block quotes with indentation
+- Blockquotes with indentation
 
 **Manuscript Standards Applied**:
-- Font from manuscript settings
-- 12pt font size
-- Precise line spacing for manuscript format
-- 1-inch margins
+- Font from Manuscript Settings
+- 12pt font size, double-spaced body text
+- 1-inch margins, precise line spacing
 - Chapter headings positioned per settings
-- Scene breaks centered
-- Block quotes indented 0.5 inches
-- Professional page layout
-
-**Special Features**:
-- **Camera-Ready**: Exactly as it will appear when printed
-- **Universal**: Opens on any device with PDF reader
-- **Non-Editable**: Preserves formatting perfectly
-- **Print-Ready**: Professional submission format
 
 **Use Cases**:
 - Agent/publisher submissions
@@ -118,107 +122,86 @@ All exports respect your manuscript settings for consistent professional formatt
 - Archival copies
 - Sharing for reading (not editing)
 
-**How to Export**:
-1. File → Export → Save as PDF
-2. Choose save location
-3. Open in any PDF reader
+### EPUB (E-Reader Format)
+
+**What It Includes**:
+- Full manuscript text with inline formatting
+- Part (H2) and Chapter (H3) headings as EPUB chapters
+- Blockquotes with italic indentation
+- Scene breaks styled as ornaments (· · ·, * * *, or rule)
+- Optional cover image, title page, and table of contents
+- Book metadata: title, author, language, description
+
+**EPUB-Specific Options** (configured in the EPUB export modal):
+
+| Option | Description |
+|--------|-------------|
+| **Cover Image** | JPG or PNG, ideal 2:3 ratio. Also set in Story settings. |
+| **Language** | Used for EPUB metadata and reader language detection. |
+| **Description** | Back-cover synopsis, stored in EPUB metadata. |
+| **Chapter Style** | Centered (novel), Bold (non-fiction), or Minimal |
+| **Scene Breaks** | · · · (dots), * * * (asterism), or horizontal rule |
+| **Table of Contents** | Toggle EPUB TOC page on or off |
+
+**Send to Kindle**:
+- Check **Send to Kindle** in the export modal
+- Enter your Kindle email address (see [Finding Your Kindle Email](#finding-your-kindle-email) below)
+- On first use, add **kindle@storytellr.app** to your Amazon Approved Email List (see [Approving Storytellr as a Sender](#approving-storytellr-as-a-sender))
+- Click **Send to Kindle** — the EPUB is generated and emailed directly to your device
+
+**How Structure Maps to EPUB Chapters**:
+
+| Editor Element | EPUB Result |
+|----------------|-------------|
+| H2 (Part) | New EPUB chapter entry (part divider) |
+| H3 (Chapter) | New EPUB chapter entry |
+| Content before first heading | Front matter |
+| HR scene break | Centred ornament (· · · or * * *) or rule |
+| Blockquote | Indented italic passage |
+
+> **Note**: EPUB readers (Kindle, Kobo, Apple Books) apply their own typography. Font choices in Manuscript Settings do not affect EPUB — the reader's font and size preferences take precedence.
+
+**Compatible Readers**:
+- Amazon Kindle (via Send to Kindle or sideloading)
+- Kobo
+- Apple Books
+- Google Play Books
+- Calibre (desktop)
+- Any EPUB-compatible reader
+
+---
 
 ## Manuscript Formatting
 
+### How Storytellr Tags Map to Each Format
+
+| Editor Element | DOCX | PDF | EPUB |
+|----------------|------|-----|------|
+| **H2** (Part) | Heading 2 style, centred | Centred, proper spacing | New chapter entry |
+| **H3** (Chapter) | Heading 3 style, positioned 1/3 or 1/2 page | Same positioning | New chapter entry |
+| **HR** (Scene break) | Centred "#" text | Centred "#" text | Ornament or rule |
+| **Blockquote** | 0.5" left indent | 0.5" left indent | Indented italic |
+| **Paragraph** | Double-spaced, 0.5" first-line indent | Same | Reader-controlled |
+| **Paragraph after H2/H3** | No first-line indent | No first-line indent | No indent |
+| **Bold / Italic / Underline** | Preserved | Preserved | Preserved |
+
 ### Standard Manuscript Format
 
-Storytellr follows **William Shunn's manuscript format** guidelines:
+Storytellr follows **William Shunn's manuscript format** for DOCX and PDF exports:
 
-**Typography**:
-- 12pt font size
-- Courier New, Times New Roman, or Arial
-- Black text on white background
-- No extra styling or decorations
-
-**Spacing**:
-- Double-spaced body text
-- 1-inch margins on all sides
-- Single space after periods
+- 12pt font, double-spaced, 1-inch margins
+- First paragraph of each chapter: no indent
+- All other paragraphs: 0.5" first-line indent
+- Chapter headings 1/3 or 1/2 down the page (configurable in settings)
 - No extra space between paragraphs
 
-**Paragraphs**:
-- First line indented 0.5 inches
-- No indent after chapter headings
-- No indent for first paragraph of manuscript
+> EPUB is exempt from manuscript format rules — e-reader typography is controlled by the reading device.
 
-**Chapters**:
-- Begin 1/3 or 1/2 down the page (configurable)
-- All caps or title case (your choice)
-- Centered or left-aligned (via formatting)
-
-**Scene Breaks**:
-- Centered "#" or "***" (or use H2 for automatic formatting)
-- Extra space above and below (H2 handles this)
-
-### How Storytellr Elements Map to Format
-
-| Editor Element | DOCX Export | PDF Export |
-|----------------|-------------|------------|
-| **H1** | Heading 1 style, positioned 1/3 or 1/2 page | Same positioning, proper spacing |
-| **H2** | Heading 2 style, centered | Centered, proper spacing |
-| **Paragraph** | Double-spaced, 0.5" first-line indent | Same |
-| **Paragraph after H1/H2** | No first-line indent | Same |
-| **Block Quote** | 0.5" left indent, single paragraph | Same |
-| **Bold** | Bold formatting preserved | Same |
-| **Italic** | Italic formatting preserved | Same |
-| **Underline** | Underline formatting preserved | Same |
-
-### Chapter Spacing
-
-**1/3 Page Option**:
-- Chapter heading begins 3847 twips from top (about 1/3 of page)
-- Followed by blank paragraph with page break
-
-**1/2 Page Option**:
-- Chapter heading begins 6480 twips from top (exactly 1/2 of page)
-- Followed by blank paragraph with page break
-
-**Why This Matters**:
-- Traditional manuscript format
-- Creates dramatic chapter openings
-- Professional appearance
-- Helps agents/editors navigate manuscript
-
-### Scene Break Formatting
-
-**H2 Elements**:
-- Centered automatically
-- No extra spacing before or after
-- Flows naturally with surrounding paragraphs
-- Can contain symbols (#, ***, etc.) or text
-
-**Best Practices**:
-- Use simple symbols (#) for clean breaks
-- Or use descriptive text ("Three Days Later")
-- Avoid excessive styling
-- Keep it simple and professional
-
-### Block Quotes
-
-**Formatting**:
-- Indented 0.5 inches from left margin
-- All content on single line in export
-- Inline formatting (bold, italic) preserved
-- No extra spacing
-
-**Use Cases**:
-- Letters within narrative
-- Excerpts from fictional documents
-- Poetry or song lyrics
-- Emphasized passages
-
-**How to Create**:
-1. Select text
-2. Click **Q** in floating toolbar
-3. Text becomes block quote
-4. Exports with proper indentation
+---
 
 ## Headers & Page Numbers
+
+Applies to **DOCX and PDF** exports only.
 
 ### Configuring Headers
 
@@ -227,68 +210,26 @@ In Manuscript Settings:
 1. **Enable Headers**: Toggle on/off
 2. **Author Name**: Your last name (appears in header)
 3. **Manuscript Title**: Short title (appears in header)
-4. **Format**: Choose layout:
-   - `LastName / TITLE / PageNumber`
-   - `TITLE / LastName / PageNumber`
-5. **First Page Different**: Skip header on first page (recommended)
+4. **First Page Different**: Skip header on first page (recommended for submissions)
 
-### Header Formats
+### Header Format
 
-**Option 1: LastName / TITLE / Page**
 ```
-Smith / THE NOVEL / 1
-```
-
-**Option 2: TITLE / LastName / Page**
-```
-THE NOVEL / Smith / 1
+LastName / TITLE / 1
 ```
 
 ### Page Numbering
 
-- **DOCX**: Uses Word's page numbering system
-  - Shows as `{PAGE}` in header
-  - Updates automatically in Word
-  - Starts at page 1 (or 2 if first page different)
+- **DOCX**: Word's built-in page numbering, updates automatically
+- **PDF**: Generated during export, sequential throughout
 
-- **PDF**: Generated page numbers
-  - Calculated during export
-  - Shows actual page number
-  - Sequential throughout document
-
-### First Page Different
-
-**When Enabled**:
-- First page has no header
-- Page numbering starts on page 2
-- Title page doesn't count in numbering
-
-**When Disabled**:
-- All pages have headers
-- Page 1 has header with "1"
-- Title page is page 1 (if included)
-
-**Best Practice**:
-- Enable for submissions (standard format)
-- Disable for drafts if you prefer continuous numbering
+---
 
 ## Title Pages
 
-### Configuring Title Page
+Toggle **Show title page** in Manuscript Settings. The title page is generated automatically from your Story settings (title, author name).
 
-In Manuscript Settings:
-- Toggle **Include Title Page**
-- Title page adds automatically to exports
-
-### Title Page Format
-
-**Content**:
-- Manuscript title (centered, upper third)
-- Author name (centered, below title)
-- Word count (rounded to nearest 1000)
-- All content centered and properly spaced
-
-**Standard Layout**:
+**Standard layout**:
 ```
 [1/3 down page]
 
@@ -299,275 +240,109 @@ Author Name
 Approximately 85,000 words
 ```
 
-**Page Numbering**:
-- Title page is not numbered
-- First manuscript page is page 1
-- Headers begin on first manuscript page (or page 2 if "first page different")
+**Include for**: Agent submissions, publisher submissions, contest entries  
+**Omit for**: Drafts, beta reader copies, revision tracking
 
-### Use Cases
-
-**Include Title Page For**:
-- Agent submissions
-- Publisher submissions
-- Contest entries
-- Professional presentations
-
-**Omit Title Page For**:
-- Drafts
-- Personal copies
-- Beta reader copies
-- Revision tracking
-
-## Format-Specific Details
-
-### TXT Export Details
-
-**Line Endings**:
-- Windows: CRLF (`\r\n`)
-- Mac/Linux: LF (`\n`)
-- Handled automatically by browser
-
-**Encoding**:
-- UTF-8 encoding
-- Supports international characters
-- Preserves special characters (em-dashes, quotes)
-
-**Structure**:
-- Paragraphs separated by blank lines
-- Headings appear as plain text
-- No special formatting markers
-
-### DOCX Export Details
-
-**Technical Specifications**:
-- Created using docx.js library (v9.5.1)
-- Compliant with Office Open XML standards
-- Compatible with Microsoft Word 2007+
-
-**Paragraph Spacing**:
-- Body text: 24pt spacing (double-spaced)
-- After paragraphs: 0pt (no extra space)
-- Line spacing: 1.0 (exact)
-
-**Indentation**:
-- First line: 720 twips (0.5 inches)
-- Calculated in twips (1/1440th of an inch)
-- Precise positioning
-
-**Chapter Spacing**:
-- 1/3 page: 3847 twips from top
-- 1/2 page: 6480 twips from top
-- Page break after each chapter heading
-
-**Heading Styles**:
-- H1: `HeadingLevel.HEADING_1`, black color
-- H2: `HeadingLevel.HEADING_2`, black color
-- Enables Word navigation pane integration
-
-**Headers**:
-- Created using `new Header()` object
-- Includes `PageNumber.CURRENT` wrapped in `TextRun`
-- Format with slashes as separators
-
-### PDF Export Details
-
-**Technical Specifications**:
-- Created using jsPDF library
-- A4 page size (210mm x 297mm)
-- 72 points per inch
-
-**Font Handling**:
-- Times New Roman → built-in 'times' font
-- Arial → built-in 'helvetica' font
-- Courier New → built-in 'courier' font
-
-**Margin Calculations**:
-- All margins: 72 points (1 inch)
-- Content area: 130mm width
-- Automatic page breaks
-
-**Line Spacing**:
-- Calculated from font size
-- Double-spaced for body text
-- Single-spaced for headers
-
-**Page Numbers**:
-- Generated dynamically
-- Positioned in header area
-- Formatted according to settings
+---
 
 ## Export Workflow
 
 ### Pre-Export Checklist
 
-1. **Review Manuscript Settings**:
-   - Font selection appropriate?
-   - Chapter spacing set correctly?
-   - Headers configured (if needed)?
+1. **Check your tags**:
+   - Part headings use **H2** (Part button)?
+   - Chapter headings use **H3** (Chapter button)?
+   - Scene breaks use **HR** (divider button)?
+   - Quoted passages use **Blockquote** (Q button)?
+
+2. **Review Manuscript Settings**:
+   - Font, chapter spacing, headers configured?
    - Title page desired?
 
-2. **Check Formatting**:
-   - Chapter headings use H1?
-   - Scene breaks use H2?
-   - Block quotes properly formatted?
-   - No excessive empty paragraphs?
-
-3. **Verify Content**:
-   - All chapters complete?
-   - Spelling checked?
-   - Final revision applied?
+3. **For EPUB**:
+   - Title, author, language, and description set in Story settings?
+   - Cover image uploaded?
 
 ### Exporting for Submission
 
-**Recommended Settings**:
-- Font: Times New Roman (most traditional)
-- Chapter Spacing: 1/3 page (standard)
-- Include Title Page: Yes
-- Headers: Enabled
-- Format: `LastName / TITLE / PageNumber`
-- First Page Different: Yes
-
-**Recommended Format**:
-- PDF for most agent submissions
-- DOCX if specifically requested
-- Check submission guidelines first
-
-### Exporting for Review
-
-**Recommended Settings**:
-- Font: Your preference
+**Recommended settings**:
+- Font: Times New Roman
 - Chapter Spacing: 1/3 page
-- Title Page: Optional
-- Headers: Optional
-- Format: DOCX (allows comments/track changes)
+- Include Title Page: Yes
+- Headers: Enabled, First Page Different: Yes
+- Format: DOCX (if requested) or PDF
 
-### Exporting for Backup
+### Exporting for E-Readers
 
-**Recommended Settings**:
-- All formats (TXT, DOCX, PDF)
-- Keep settings consistent
-- Regular exports to secure location
-- Date-stamped filenames
+- Export as **EPUB**
+- Use **Send to Kindle** to deliver directly to your Kindle
+- Or export and sideload via Calibre, Apple Books, etc.
+
+---
+
+## Send to Kindle
+
+### Finding Your Kindle Email
+
+Each Kindle device and app has its own unique email address (e.g. `yourname@kindle.com`).
+
+**Via Amazon website:**
+
+1. Log into your Amazon account
+2. Go to **Accounts & Lists → Manage Your Content and Devices**
+3. Click the **Devices** tab
+4. Select the Kindle device you want to send to
+5. Your Kindle email is shown under the device info
+
+**Via your Kindle device:**
+
+1. From the home screen, tap the menu icon or settings gear
+2. Go to **Device Options** or **My Account**
+3. Look for **Send-to-Kindle Email** or **Personalize Your Kindle**
+
+> Each device has its own address — pick the one for the Kindle you read on most.
+
+### Approving Storytellr as a Sender
+
+Amazon only delivers documents from approved senders. You only need to do this once.
+
+1. Go to **Manage Your Content and Devices → Settings**
+2. Scroll to **Personal Document Settings**
+3. Under **Approved Personal Document E-mail List**, click **Add a new approved e-mail address**
+4. Enter **kindle@storytellr.app** and save
+
+After approving, documents sent from Storytellr will deliver to your Kindle automatically.
+
+---
 
 ## Troubleshooting
 
-### Common Issues
-
-**Headers Not Appearing**:
-- Ensure "Enable Headers" is checked in settings
+### Headers Not Appearing
+- Ensure "Include headers in exports" is checked in Manuscript Settings
 - Verify author name and title are filled in
-- Check "First Page Different" setting
 
-**Chapter Spacing Incorrect**:
-- Verify chapter spacing setting (1/3 vs 1/2)
-- Ensure H1 is used for chapters
-- Check for conflicting formatting
+### Chapter Spacing Incorrect
+- Verify chapter spacing setting (1/3 vs 1/2) in Manuscript Settings
+- Ensure chapters use **H3**, not H2 or plain text
 
-**First Paragraph Indented**:
-- This is correct for standard manuscript format
-- First paragraph after headings should not indent (automatic)
+### EPUB Chapters Not Splitting Correctly
+- Each chapter must start with an **H3** heading (Chapter button)
+- Parts must use **H2** (Part button)
+- Content before the first heading is treated as front matter
 
-**Block Quotes Spanning Multiple Lines**:
-- Storytellr correctly exports block quotes as single paragraphs
-- Line breaks within quotes are preserved in editor but formatted correctly on export
+### Send to Kindle Not Delivering
+- Confirm your Kindle email is correct — each device has its own address
+- Ensure **kindle@storytellr.app** is on your Amazon Approved Email List
+- Check your Kindle device is registered and connected to Wi-Fi
 
-### Format-Specific Issues
+### DOCX Navigation Pane Empty
+- Confirm headings are H2 (Part) or H3 (Chapter), not plain text
+- Open Navigation Pane in Word: View → Navigation Pane
 
-**DOCX Problems**:
-- If navigation doesn't work, check headings are H1/H2
-- If spacing is wrong, verify settings before export
-- Ensure Microsoft Word 2007 or later
-
-**PDF Problems**:
-- If fonts look wrong, check browser's PDF renderer
-- If margins are off, verify page size settings
-- Try different PDF readers if appearance varies
-
-**TXT Problems**:
-- If encoding is wrong, ensure UTF-8 support
-- If line breaks are wrong, check text editor settings
-
-## Best Practices
-
-### Manuscript Preparation
-
-1. **Use Consistent Formatting**: 
-   - H1 for all chapters
-   - H2 for all scene breaks
-   - Don't mix formatting styles
-
-2. **Check Preview**:
-   - Export PDF to preview layout
-   - Verify chapter positioning
-   - Check page breaks
-
-3. **Test Early**:
-   - Export test pages early
-   - Verify formatting meets requirements
-   - Adjust settings as needed
-
-### Submission Preparation
-
-1. **Follow Guidelines**:
-   - Check agent/publisher requirements
-   - Some want specific fonts or spacing
-   - Some prefer DOCX, others PDF
-
-2. **Clean Export**:
-   - Remove author notes
-   - Delete bracketed comments
-   - Remove incomplete sections
-
-3. **Professional Appearance**:
-   - Consistent formatting throughout
-   - No extra blank pages
-   - Proper headers and page numbers
-
-### Version Control
-
-1. **Date-Stamped Exports**:
-   - Add date to filename
-   - Keep multiple versions
-   - Track major revisions
-
-2. **Format Archives**:
-   - Keep all format versions
-   - PDF for archival
-   - DOCX for working copies
-   - TXT for backup
-
-## Advanced Tips
-
-### Custom Formatting
-
-**Scene Break Symbols**:
-- Create H2 with just "#"
-- Or use "***"
-- Or use "• • •"
-- Exports as-is with centering
-
-**Chapter Titles**:
-- "Chapter One" vs "CHAPTER ONE"
-- Use formatting toolbar for caps
-- Or type as desired
-
-### Multiple Export Formats
-
-**Batch Exporting**:
-1. Export as TXT for backup
-2. Export as DOCX for editing
-3. Export as PDF for submission
-4. Keep all versions organized
-
-### Automation
-
-- Save manuscript settings with template
-- Use same settings across manuscripts
-- Export regularly during writing process
-- Maintain consistent professional format
+---
 
 ## Additional Resources
 
-- [User Guide](USER_GUIDE.md) - Complete Storytellr documentation
-- [Features Reference](FEATURES.md) - All features explained
-- [William Shunn's Manuscript Format](https://www.shunn.net/format/) - Industry standard guidelines
+- [User Guide](USER_GUIDE.md) — Complete Storytellr documentation
+- [Features Reference](FEATURES.md) — All features explained
+- [William Shunn's Manuscript Format](https://www.shunn.net/format/) — Industry standard guidelines
